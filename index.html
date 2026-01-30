@@ -198,7 +198,20 @@
             letter-spacing: 2px;
         }
         button:hover { background: #fff; color: #000; box-shadow: 0 0 20px #fff; }
-        button:disabled { border-color: #555; color: #555; cursor: not-allowed; box-shadow: none; background: #111; }
+        
+        /* DISABLED BUTTON STYLE */
+        button:disabled { 
+            border-color: #555; 
+            color: #555; 
+            cursor: not-allowed; 
+            box-shadow: none; 
+            background: #111; 
+        }
+        button:disabled:hover {
+            background: #111;
+            color: #555;
+            box-shadow: none;
+        }
 
         .btn-green:hover { background: #0f0; box-shadow: 0 0 20px #0f0; }
         .btn-red:hover { background: #f00; color:white; box-shadow: 0 0 20px #f00; border-color:#f00; }
@@ -299,7 +312,7 @@
             <button onclick="startGame()">DEPLOY SHIP</button>
             <br>
             <button onclick="openShop()">ARMORY & SKINS</button>
-            <button onclick="openLeaderboard()">LOCAL RECORDS</button>
+            <button disabled>LEADERBOARD COMING SOON</button>
             <br>
             <button class="reset-btn" onclick="resetData()">RESET DATA</button>
         </div>
@@ -352,7 +365,7 @@
             <h2 id="final-score-display">SCORE: 0</h2>
             
             <div id="go-choice-container">
-                <button onclick="showNameInput()" class="btn-green" id="submit-btn-trigger">LEADERBOARD COMING SOON</button>
+                <button disabled class="btn-green" id="submit-btn-trigger">LEADERBOARD COMING SOON</button>
                 <button onclick="returnToMenu()" class="btn-red">SKIP & MENU</button>
             </div>
 
@@ -1106,11 +1119,6 @@
         document.getElementById('final-score-display').innerText = "SCORE: " + finalScore;
         document.getElementById('go-choice-container').style.display = 'block';
         document.getElementById('high-score-input').style.display = 'none';
-        
-        // --- LOCKED FOR NOW ---
-        const btn = document.getElementById('submit-btn-trigger');
-        btn.innerText = "LEADERBOARD COMING SOON"; 
-        btn.disabled = true;
     }
 
     function returnToMenu() {
