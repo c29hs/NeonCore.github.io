@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON CORE: SECURED GOD MODE</title>
+    <title>NEON CORE: COMING SOON MODE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
@@ -299,7 +299,7 @@
             <button onclick="startGame()">DEPLOY SHIP</button>
             <br>
             <button onclick="openShop()">ARMORY & SKINS</button>
-            <button onclick="openLeaderboard()">LEADERBOARD</button>
+            <button onclick="openLeaderboard()">LOCAL RECORDS</button>
             <br>
             <button class="reset-btn" onclick="resetData()">RESET DATA</button>
         </div>
@@ -352,7 +352,7 @@
             <h2 id="final-score-display">SCORE: 0</h2>
             
             <div id="go-choice-container">
-                <button onclick="showNameInput()" class="btn-green" id="submit-btn-trigger">SUBMIT SCORE</button>
+                <button onclick="showNameInput()" class="btn-green" id="submit-btn-trigger">LEADERBOARD COMING SOON</button>
                 <button onclick="returnToMenu()" class="btn-red">SKIP & MENU</button>
             </div>
 
@@ -650,7 +650,6 @@
         
         if (code === "neon123") {
             saveData.currency = 9999999;
-            // ONLY UNLOCK NON-HIDDEN SKINS
             SKIN_CATALOG.forEach(s => { 
                 if(!s.hidden && !saveData.skins.includes(s.id)) {
                     saveData.skins.push(s.id); 
@@ -1107,8 +1106,11 @@
         document.getElementById('final-score-display').innerText = "SCORE: " + finalScore;
         document.getElementById('go-choice-container').style.display = 'block';
         document.getElementById('high-score-input').style.display = 'none';
+        
+        // --- LOCKED FOR NOW ---
         const btn = document.getElementById('submit-btn-trigger');
-        if(isHighScore(finalScore)) { btn.innerText = "SUBMIT NEW RECORD"; btn.disabled = false; } else { btn.innerText = "SCORE TOO LOW"; btn.disabled = true; }
+        btn.innerText = "LEADERBOARD COMING SOON"; 
+        btn.disabled = true;
     }
 
     function returnToMenu() {
