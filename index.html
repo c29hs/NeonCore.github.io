@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON CORE: LOCKED MODE</title>
+    <title>NEON CORE: CODE UPDATE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 
@@ -431,7 +431,8 @@
         skins: ['DEFAULT'],
         equippedSkin: 'DEFAULT',
         bestScore: 0, 
-        highScores: [] 
+        highScores: [],
+        codeUsage: {} // NEW: Tracks how many times a code has been used
     };
     
     let saveData = JSON.parse(localStorage.getItem('neonCoreVisualsV9')) || defaultData;
@@ -441,6 +442,7 @@
     if(!saveData.highScores) saveData.highScores = [];
     if(!saveData.skins) { saveData.skins = ['DEFAULT']; saveData.equippedSkin = 'DEFAULT'; }
     if(!saveData.upgrades.health) saveData.upgrades.health = 1;
+    if(!saveData.codeUsage) saveData.codeUsage = {}; // Ensure code usage tracker exists
 
     function saveGame() {
         localStorage.setItem('neonCoreVisualsV9', JSON.stringify(saveData));
@@ -689,6 +691,22 @@
             saveData.currency += 2000;
             saveGame(); renderShop(); resetPreviewStats();
             alert("PAYCHECK RECEIVED: +2000 BITS");
+            input.value = "";
+        }
+        // --- NEW CODE: gimmie50 ---
+        else if (code === "gimmie50") {
+            // Check usage count
+            const uses = saveData.codeUsage['gimmie50'] || 0;
+            
+            if (uses < 5) {
+                saveData.currency += 50;
+                saveData.codeUsage['gimmie50'] = uses + 1;
+                saveGame();
+                renderShop();
+                alert(`SUCCESS! +50 BITS (${5 - (uses + 1)} USES LEFT)`);
+            } else {
+                alert("MAX USES REACHED FOR THIS CODE");
+            }
             input.value = "";
         }
         else {
